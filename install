@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# upgrade packaging tools
+pip install --upgrade pip
+pip install --upgrade build
+
+# install requirements
+pip install -r dependencies.txt
+
+# build package
+python3 -m build
+
+# install
+pip install dist/biopy*whl
