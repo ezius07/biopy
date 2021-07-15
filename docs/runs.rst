@@ -3,19 +3,34 @@ Replicating results
 ********************
 
 
-The main class that is a wrapper to provide access to all the training subclasses is 
-`ThanosTrainer` in `biopy.training.trainer_wrapper.py`
+After having presented the technical details of how the different pipelines are implemented, this section 
+provides a more practical approach with snippets on how to run experiments to replicate our results.
 
-The trainer wrapper
-============================
+See :ref:`Installation` for details on how to download the datasets and the source code.
 
-The `ThanosTrainer` class provides an easy way to run all the different training methods on all the
-available datasets, allowing to replicate our results.
-It offers a way to specify the parameters for each step of the training pipeline.
+Run the script 
+================
 
-Most of the code in the class is boilerplate that makes internal state checks to ensure that its methods
-are called in the right order to build the pipeline.
+A script to easily replciate all the reported results is provided at `scripts/run.py`.
+It does not add anything to the proposed framework, and it is provided for convenience of the external user
+to take care of the argument parsing and config specification.
 
-Training methods are represented in the form of "strategies", that are encoded in dictionaries inside this class.
-The user has to set the name of the strategy, and the class knows how to implement it.
-Each strategy can have one or more agents; where an agent is a class, and each agent can implement one or more stages
+The high level parameters are passed to the command line, such as the dataset path, the strategy, logging 
+folder. Instead for the more specific details, a config file is needed. All the config files for the reported 
+experiments are provided under `configs` folder in the format of `.ini` files.
+
+Here is a summary of the command line argument:
+
+.. code:: console
+
+    usage: run.py [-h] --fold FOLD --log_dir LOG_DIR --strategy STRATEGY --config_path CONFIG_PATH
+
+    arguments:
+    -h, --help                  show this help message and exit
+    --fold FOLD                 dataset path
+    --log_dir LOG_DIR           directory to store the log files
+    --strategy STRATEGY         strategy to perform the training
+    --config_path CONFIG_PATH   path of the configuration file
+
+Baseline 
+----------------------

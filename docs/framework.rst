@@ -150,3 +150,52 @@ All the other classes get these methods "for free" and can use them with no need
     Called after every epoch receiving the epoch number (for logging purposes) and the average loss that is used
     as criteria to find the best model if no metrics were specified. It removes the file for the
     previous best model and saves a new one, putting in the name the metric, the domain and the epoch number.
+
+
+The trainer wrapper
+============================
+
+On top of the trainer classes described above, there is a wrapper to provide easy and structured
+access to all the training subclasses; this class is `ThanosTrainer` in `biopy.training.trainer_wrapper.py`
+It offers a way to specify the parameters for each step of the training pipeline.
+
+Most of the code in the class is boilerplate that makes internal state checks to ensure that its methods
+are called in the right order to build the pipeline, providing a robust interface to easily switch
+among training methods and datasets specifying all the needed hyperparameters.
+
+Training methods are represented in the form of "strategies", that are encoded in dictionaries inside this class.
+The user has to set the name of the strategy, and the class automatically knows how many trainer class are needed to perform
+that strategy, and how to pipeline them.
+Each strategy can have one or more agents; where an agent is a trainer class, and each agent can implement one or more stages
+
+Beyond setting the strategy, what the user has to do is to call, for each agent class that composes the strategy,
+the main methods that represent its pipeline (as described above) in order to specify the required parameters.
+Specifically these methods are :
+
+* `generate_dataset_loaders(dataset_class, **kwargs)`
+
+* `preprocess_dataset(dataset, parameters)`
+
+* `generate_models_optimizers(model_class, optimizer_SGD, **kwargs)`
+
+* `train_model(**kwargs)`
+
+Upon call of these methods Thanos will not perform any action, as these calls represent the statement of
+the parameters of the pipeline that has to be followed. After this step, when the user wants to start
+the training, it is possible to do so by calling :
+
+* `exec()`
+
+That will start the pipeline relative to the strategy that has been set.
+Since the trainer classes require in many cases a number of other parameters that are specified in a dictionary upon initialization; in order
+to provide these parameters it is possible to pass them to the Thanos constructor, in the form of a list with 
+an item for each agent class of the strategy.
+This is useful to specify many useful behaviors such as ask to save models, specify log directory and so on.
+
+Now, of course beyond running experiments, what one is typically interested in is looking at results.
+Another useful feature offered by `ThanosTrainer` is logging, through the tensorboard platform.
+After every run, it will log first of all, all the hyperparameters used; and the progress of training.
+The latter by default is composed of the training and validation loss; additionally, if any metrics were specified to 
+be evaluated, they will be logged as well.
+
+If asked to do so, the best performing models for each metric will be saved too.

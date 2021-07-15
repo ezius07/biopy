@@ -14,7 +14,7 @@ To download the source code, you can run this command:
 
 .. code:: console
 
-    $ git clone https://github.com/Erosinho13/Multiomics_autoencoders_BioProject
+    $ git clone https://github.com/BioPyTeam/biopy
 
 
 .. note::
