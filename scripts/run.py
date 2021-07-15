@@ -1,17 +1,3 @@
-# TOREMOVE, temporary fix
-import sys
-import os
-import socket
-# makes the biopy package visible no matter where the scripts
-# are launched from - as long as you keep 'scripts' as a sibling of 'biopy'
-script_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.dirname(script_dir))
-
-# only for my local machine - gabT - TOREMOVE
-hostname = socket.gethostname()
-if hostname == "ga1i13o": 
-    os.environ["CUDA_VISIBLE_DEVICES"]="0"
-
 import argparse
 import os
 from configparser import ConfigParser
@@ -134,10 +120,17 @@ class ParameterParser:
                                 el_value = [el_value]
                     if section.split("_")[-2] == "MODELCLASS":
                         if param.split("_")[-1] == "class":
-                            if self.__config["DATASET_" + agent]["dataset_class"] == "DatasetMultiOmicsNatureTrainTest" \
-                                    and len(self.__config["MODEL_" + agent]["omics"]) == 2:
-                                el_value = get_model_cd4_closure(self.__config["MODELCLASS_" + agent]['image_model'],
-                                                                 self.__config["MODELCLASS_" + agent]['rna_model'])
+                            try:
+                                omics = ast.literal_eval(self.__config["MODEL_" + agent]["omics"])
+                            except KeyError:
+                                omics = []
+                            if ast.literal_eval(self.__config["DATASET_" + agent]["dataset_class"]) \
+                                    == "DatasetMultiOmicsNatureTrainTest" \
+                                    and len(omics) > 1 \
+                                    and param != "discriminator_class":
+                                self._params[int(agent) - 1][section.split("_")[-2]]["model_class"]\
+                                    = get_model_cd4_closure(ast.literal_eval(self.__config["MODELCLASS_" + agent]['image_model_class']),
+                                                            ast.literal_eval(self.__config["MODELCLASS_" + agent]['rna_model_class']))
                             else:
                                 el_value = get_model(el_value)
                     if section.split("_")[-2] == "METRIC":
@@ -170,7 +163,7 @@ def main(config_path, fold, log_dir, strategy):
 
     params = ParameterParser(config_path, strategy)
 
-    parameter_dict = [HParams(**params.get_section(agent, "HPARAMS")) for agent in range(num_agents)]
+    parameter_dict = [HParams(**params.get_section(agent+1, "HPARAMS")) for agent in range(num_agents)]
 
     tt = ThanosTrainer(parameter_dict, log_dir=log_dir)
     tt.strategy = strategy
