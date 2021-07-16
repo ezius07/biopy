@@ -1,3 +1,7 @@
+### PACKAGE BUILD
+dist/
+*egg*
+
 ### TRIVIO STUFF 
 *log_*
 bio*ipynb

@@ -2,13 +2,56 @@
 Installation
 ************
 
-One way to reproduce the results presented in this work is to download and run the source code of this project.
+There are many ways to fetch the package presented and reproduce the results reported.
+Below we describe the different ways to install everything properly.
 We also provide some code and snippets to download and preprocess the presented datasets from their 
 original sources so that each dataset can be easiliy and reliably retrieved.
 
+.. warning::
+    Given that our project was developed using DeepLearning techniques, it requires a specific set of libraries to run.
+    We provide the list of dependencies, but beware that installing such dependencies can download some big packages (e.g. pytorch)
+    and requires a cudaSDK installation as well. 
 
-Downloading the source code
-===========================
+Getting started
+============================
+
+Here are reported 3 ways in which you can have access to our code
+
+
+Install via PyPy repository
+---------------------------
+
+We deployed our package to the PyPy repository; however to avoid specifying a fixed list of dependencies together with the packages, it
+is deployed standalone and requirements are provided separately in a file in our repository, so they have to be installed separately
+
+.. code:: console
+
+    $ pip install biopy
+    $ git clone https://github.com/BioPyTeam/biopy
+    $ cd biopy
+    $ pip install -r dependencies.txt
+
+And that's it!
+
+Install via setup file
+---------------------------
+
+You can also simply clone the repo and install the package with the provided script. It will install `biopy` in the
+current python environment.
+
+.. code:: console
+
+    $ git clone https://github.com/BioPyTeam/biopy
+    $ cd biopy
+    $ ./install
+
+
+Download the source code only
+------------------------------
+
+If you do not want to install any package and just download the code, you can do so.
+In this case, if you want to execute any of the provided snippets, you need to have `src/biopy` in your `sys.path` folder,
+or to execute commands from a sibling directory of `src/biopy`.
 
 To download the source code, you can run this command:
 
@@ -19,8 +62,8 @@ To download the source code, you can run this command:
 
 .. note::
 
-    Some additional third-party packages must also be installed:
-    pytorch, scikit-learn, imblearn, pandas, numpy
+    You still need to get the third-party packages.
+    See the provided dependencies.txt file
 
 	
 Downloading the datasets

@@ -32,5 +32,6 @@ Here is a summary of the command line argument:
     --strategy STRATEGY         strategy to perform the training
     --config_path CONFIG_PATH   path of the configuration file
 
-Baseline 
+
+Reproducing baseline  
 ----------------------
