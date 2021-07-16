@@ -6,18 +6,22 @@ Replicating results
 After having presented the technical details of how the different pipelines are implemented, this section 
 provides a more practical approach with snippets on how to run experiments to replicate our results.
 
-See :ref:`Installation` for details on how to download the datasets and the source code.
+.. warning::
+    To execute the snippets in this section you need to install our package and its dependencies.
+    See :ref:`Installation` for details on how to do that and download the datasets as well.
+
 
 Run the script 
 ================
 
-A script to easily replciate all the reported results is provided at `scripts/run.py`.
+A script to easily replicate all the reported results is provided at `scripts/run.py`.
 It does not add anything to the proposed framework, and it is provided for convenience of the external user
 to take care of the argument parsing and config specification.
 
 The high level parameters are passed to the command line, such as the dataset path, the strategy, logging 
-folder. Instead for the more specific details, a config file is needed. All the config files for the reported 
-experiments are provided under `configs` folder in the format of `.ini` files.
+folder. Instead for the more specific details, a config file is needed. Config files ae represented as `.ini` files
+with different sections, one for each of the different aspects to configure.
+All the config files for the reported experiments are provided under `configs`, ready for you to try them out.
 
 Here is a summary of the command line argument:
 
@@ -33,5 +37,71 @@ Here is a summary of the command line argument:
     --config_path CONFIG_PATH   path of the configuration file
 
 
-Reproducing baseline  
-----------------------
+In our `configs` folder, you find more files than the ones mentioned in the snippet below.
+For the usage of any of them, the filename is very explicative, containing the dataset, the methodology, and any additional 
+infromation such as additional losses (e.g. `kld` ) and preprocessing techniques (e.g. `smote`)
+
+Reproducing baseline results
+-----------------------------
+
+Below we report the command to reproduce the results applying the baseline method and models to all the 3 datasets.
+
+* **CD4** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/cd4_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy baseline \
+                --config_path configs/CD4/cd4_baseline.ini
+
+* **A549** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/a549_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy baseline_1stage \
+                --config_path configs/A549/a549_baseline.ini
+
+* **GDC** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/gdc_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy baseline_1stage \
+                --config_path configs/GDC/gdc_baseline.ini
+
+
+Joint Training with Adversarial AEs
+------------------------------------
+
+This snippets are to run experiments with our proposed variation - 2 stage Joint Training.
+
+
+___to do ____
+
+MMD
+------------------
+
+* **CD4** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/cd4_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy distribution \
+                --config_path configs/CD4/cd4_mmd_kld_no_smote.ini
+
+* **A549** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/a549_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy distribution_1stage \
+                --config_path configs/A549/**MISSING**
+
+* **GDC** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/gdc_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy distribution_1stage \
+                --config_path configs/GDC/gdc_mmd_no_smote.ini

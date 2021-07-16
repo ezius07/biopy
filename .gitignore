@@ -15,7 +15,8 @@ saved_models
 *conv_aae.py
 notebooks/
 mytrainscripts/
-
+logs/
+test_configs/
 ###############
 # MACOS STUFF #
 ###############

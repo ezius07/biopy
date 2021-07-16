@@ -19,12 +19,12 @@ import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
-project = 'Multiomics Autoencoders'
+project = 'Biopy'
 copyright = '2021, Francesco Bianco Morghet, Eros Fanì, Gabriele Goletto, Gabriele Trivigno'
 author = 'Francesco Bianco Morghet, Eros Fanì, Gabriele Goletto, Gabriele Trivigno'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0'
+release = '0.1'
 
 
 # -- General configuration ---------------------------------------------------

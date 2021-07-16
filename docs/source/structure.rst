@@ -5,12 +5,42 @@ Repository structure
 In this section the structure of the repository is explained. The tree-like 
 representation is reported below:
 
-// tree -I 'dataset_*|*log*|*cache*|docs|img*|my*|papers|saved*|*ipynb|*html|*png|*todo|*pdf' -L 2
+::
 
-// use this command to generate tree structure once the main script is there
+    repository_root
+    |
+    ├── configs
+    │   ├── A549
+    │   ├── CD4
+    │   └── GDC
+    |
+    ├── dependencies.txt
+    ├── install
+    ├── install.bat
+    ├── LICENSE
+    ├── pyproject.toml
+    ├── README.md
+    |
+    ├── scripts
+    │   ├── download_dataset.sh
+    │   └── run.py
+    |
+    ├── setup.cfg
+    |
+    ├── src
+       └── biopy
+           ├── __init__.py
+           ├── datasets
+           ├── experiments
+           ├── metrics
+           ├── models
+           ├── statistic
+           ├── training
+           └── utils
 
-Our implementation is released as a python package in the homonymous 
-folder 'biopy'. The sibling folder 'scripts' contains instead examples and code that 
+
+Our implementation is released as a python package. The source code is in the 
+folder `src/biopy`. The 'scripts' folder contains instead examples and code that 
 use the tools inside the package. Their purpose is to reproduce the result that we reported.
 
 The package is made up of sub-packages each containing the tools to tackle different aspects of the proposed implementation.

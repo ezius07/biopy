@@ -24,6 +24,8 @@ Install via PyPy repository
 We deployed our package to the PyPy repository; however to avoid specifying a fixed list of dependencies together with the packages, it
 is deployed standalone and requirements are provided separately in a file in our repository, so they have to be installed separately
 
+Note that the warning above applies here: running `pip install -r dependencies.txt` will download some heavy packages.
+
 .. code:: console
 
     $ pip install biopy
