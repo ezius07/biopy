@@ -119,8 +119,9 @@ Below we report the command to reproduce the results applying the baseline metho
 Joint Training with Adversarial AEs and double discriminator
 -------------------------------------------------------------
 
+
 This snippets are to run experiments with our proposed variation - 2 stage Joint Training, with a double
- discriminator.
+discriminator.
 
 
 * **CD4** :
@@ -150,6 +151,9 @@ This snippets are to run experiments with our proposed variation - 2 stage Joint
 
 Training with losses from Domain adaptation:
 ---------------------------------------------
+
+These snippets are to execute experiments with our proposed variations that utilizes techniques from Domain adaptation.
+Use either one of the proposed losses on either one of the datasets:
 
 * **CD4** and **MMD**:
     .. code:: console
