@@ -21,8 +21,10 @@ that you need to specify, but the main one are
 * the dataset
 * the training method aka the strategy
 
-For a more specific description of how are strategy used inside our framework see :ref:`The trainer wrapper`
+For a more specific description of how are strategy used inside our framework see :ref:`The trainer wrapper`.
+
 For a more theorical perspective on said strategies, see instead our presentation.
+
 Here we report just a brief summary of all the available strategies that you can ask our framework tu run:
 
 * **one_shot** 
@@ -52,7 +54,7 @@ Here we report just a brief summary of all the available strategies that you can
 
 * **distribution_1stage**
     Same as above but without the first stage of pretraining
-    
+
 
 Run the script 
 ================

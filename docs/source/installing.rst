@@ -9,8 +9,11 @@ original sources so that each dataset can be easiliy and reliably retrieved.
 
 .. warning::
     Given that our project was developed using DeepLearning techniques, it requires a specific set of libraries to run.
-    We provide the list of dependencies, but beware that installing such dependencies can download some big packages (e.g. pytorch)
-    and requires a cudaSDK installation as well. 
+    We provide the list of dependencies, but beware that installing such dependencies can download some big packages (e.g. torch
+    bundled with a cudaSDK). 
+
+.. warning::
+    The dependencies listed require a python version >= 3.7
 
 Getting started
 ============================

@@ -25,7 +25,7 @@ class KNNAccuracySklearn:
 
     def _get_latents(self, omic):
         dataloader = data.DataLoader(self.dataset[omic], batch_size=32, shuffle=False,
-                                     pin_memory=True, drop_last=False)
+                                     pin_memory=False, drop_last=False)
 
         latents = []
         with torch.no_grad():
@@ -95,7 +95,7 @@ class FractionCorrectCluster:
 
     def _get_latents(self, omic, dataset):
         dataloader = data.DataLoader(dataset[omic], batch_size=32, shuffle=False,
-                                     pin_memory=True, drop_last=False)
+                                     pin_memory=False, drop_last=False)
 
         latents = []
         with torch.no_grad():

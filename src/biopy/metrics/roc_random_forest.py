@@ -61,7 +61,7 @@ class ROCRandomForest:
 
     def _get_error(self, omics_in, omics_out):
         dataloader = data.DataLoader(self.dataset[omics_in], batch_size=32, shuffle=False, num_workers=1, 
-                                     pin_memory=True, drop_last=False)
+                                     pin_memory=False, drop_last=False)
         
         translations = []
         for batch_features, _ in dataloader:

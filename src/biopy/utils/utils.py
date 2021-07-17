@@ -11,7 +11,7 @@ def sample_encodings(model, dataset, tsne=True, dim=3):
     '''Encode from dataset and optionally reduce dimensionality'''
     mini_batch = 32
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    loader = data.DataLoader(dataset, batch_size=mini_batch, shuffle=False, num_workers=4, pin_memory=True, drop_last=False)
+    loader = data.DataLoader(dataset, batch_size=mini_batch, shuffle=False, num_workers=4, pin_memory=False, drop_last=False)
     
     model.eval()
     model.to(device)

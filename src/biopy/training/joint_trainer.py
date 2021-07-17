@@ -66,7 +66,7 @@ class JointTrainer(Trainer):
 
             self.train_loaders[omic] = data.DataLoader(self.train_datasets[omic],
                                                       batch_sampler=BatchSampler(PredictableRandomSampler(len(self.train_datasets[omic])), batch_size=self.parameters['BATCH_SIZE'], drop_last=True), 
-                                                      num_workers=4, pin_memory=True)
+                                                      num_workers=4, pin_memory=False)
 
             self.test_loaders[omic] = data.DataLoader(self.test_datasets[omic], batch_size=64, shuffle=False, 
                                                      num_workers=4)

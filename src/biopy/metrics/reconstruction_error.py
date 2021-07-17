@@ -34,7 +34,7 @@ class LatentSpace:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         batches = 32
         loader = data.DataLoader(dataset, batch_size=batches, shuffle=True,
-                                 num_workers=4, pin_memory=True, drop_last=False)
+                                 num_workers=4, pin_memory=False, drop_last=False)
         model.eval()
         model.to(device)
         for batch_features, _ in loader:

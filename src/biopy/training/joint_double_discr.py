@@ -94,6 +94,7 @@ class JointDoubleDiscr(JointTrainer):
         BATCH_SIZE = self.parameters.get('BATCH_SIZE', 32)
         WEIGHT_DISCR_OMICS = self.parameters.get('WEIGHT_DISCR_OMICS', 2)
         WEIGHT_DISCR_LABELS = self.parameters.get('WEIGHT_DISCR_LABELS', 1)
+        KLD_WEIGHT = self.parameters.get('KLD_WEIGHT', 0)
         MSE_WEIGHT = self.parameters.get('RECONSTRUCTION_WEIGHT', 1)
         ALPHA = self.parameters.get('ALPHA', 1)
         log_freq = self.parameters.get('LOG_FREQUENCY', 3)
@@ -148,10 +149,12 @@ class JointDoubleDiscr(JointTrainer):
 
                     # compute loss
                     mse_loss = self.reconstruct_loss(outputs, batches[i][0])
+                    kld_loss = -0.5 * torch.sum(1 + log_var - mean.pow(2) - log_var.exp())
                     labels_loss = self.discriminate_loss(label_scores, batches[i][1])
                     omics_loss = self.discriminate_loss(omic_scores, dict_label[omic])
 
-                    loss = MSE_WEIGHT*mse_loss + WEIGHT_DISCR_LABELS*labels_loss + WEIGHT_DISCR_OMICS*omics_loss
+                    loss = MSE_WEIGHT*mse_loss + WEIGHT_DISCR_LABELS*labels_los0 \
+                            + WEIGHT_DISCR_OMICS*omics_loss + KLD_WEIGHT*kld_loss
 
                     # compute accumulated gradients
                     loss.backward()

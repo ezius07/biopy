@@ -18,7 +18,7 @@ from ..models import DomainTranslator
 def train_cnn(dataset, device):
     cached_model = f'.cnn'
 
-    train_dl = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, drop_last=True, pin_memory=True)
+    train_dl = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, drop_last=True, pin_memory=False)
 
     net = nn.Sequential(*[
         nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1),
@@ -69,7 +69,7 @@ def get_preds(dati, net, device):
     dati = np.reshape(dati, (dati.shape[0], 1, 64, 64))
     
     dataset = torch.tensor(dati)
-    train_dl = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, drop_last=False, pin_memory=True)
+    train_dl = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True, drop_last=False, pin_memory=False)
     
     output_list = []
     for batch in train_dl:
@@ -137,7 +137,7 @@ class ROCCNNRF:
     def _get_error(self, omics_in, omics_out):
         # Get translations
         dataloader = data.DataLoader(self.dataset[omics_in], batch_size=32, shuffle=False, num_workers=1,
-                                     pin_memory=True, drop_last=False)
+                                     pin_memory=False, drop_last=False)
 
         translations = []
         for batch_features, _ in dataloader:

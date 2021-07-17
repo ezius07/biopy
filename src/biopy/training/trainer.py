@@ -69,7 +69,7 @@ class Trainer():
 
         self.train_loader = data.DataLoader(self.train_dataset, batch_size=self.parameters['BATCH_SIZE'], 
                                             shuffle=True, num_workers=4, 
-                                            pin_memory=True, drop_last=True)
+                                            pin_memory=False, drop_last=True)
         
         self.test_loader = data.DataLoader(self.test_dataset, batch_size=1, shuffle=False, num_workers=4)
         if 'INPUT_SIZE' not in self.parameters:
