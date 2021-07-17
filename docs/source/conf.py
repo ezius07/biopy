@@ -35,7 +35,8 @@ release = '0.1'
 extensions = [
     'sphinx_rtd_theme',
     'sphinxcontrib.bibtex',
-    'sphinx.ext.autosectionlabel'
+    'sphinx.ext.autosectionlabel',
+    'sphinx_tabs.tabs'
 ]
 
 bibtex_bibfiles = ['refs.bib']

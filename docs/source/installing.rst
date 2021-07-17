@@ -44,11 +44,23 @@ Install via setup file
 You can also simply clone the repo and install the package with the provided script. It will install `biopy` in the
 current python environment.
 
-.. code:: console
+.. tabs::
 
-    $ git clone https://github.com/BioPyTeam/biopy
-    $ cd biopy
-    $ ./install
+   .. tab:: Windows
+        
+        .. code:: console
+
+            > git clone https://github.com/BioPyTeam/biopy
+            > cd biopy
+            > install.bat
+
+   .. tab:: Linux/Mac
+
+        .. code:: console
+
+            $ git clone https://github.com/BioPyTeam/biopy
+            $ cd biopy
+            $ ./install
 
 
 Download the source code only

@@ -116,18 +116,42 @@ Below we report the command to reproduce the results applying the baseline metho
                 --config_path configs/GDC/gdc_baseline.ini
 
 
-Joint Training with Adversarial AEs
-------------------------------------
+Joint Training with Adversarial AEs and double discriminator
+-------------------------------------------------------------
 
 This snippets are to run experiments with our proposed variation - 2 stage Joint Training, with a double
  discriminator.
 
-___to do ____
-
-MMD
-------------------
 
 * **CD4** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/cd4_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy baseline \
+                --config_path configs/CD4/cd4_baseline.ini
+
+* **A549** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/a549_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy baseline_1stage \
+                --config_path configs/A549/a549_baseline.ini
+
+* **GDC** :
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/gdc_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy baseline_1stage \
+                --config_path configs/GDC/gdc_baseline.ini
+
+
+Training with losses from Domain adaptation:
+---------------------------------------------
+
+* **CD4** and **MMD**:
     .. code:: console
         
         python scripts/run.py --fold /your/path/to/cd4_folder \
@@ -135,18 +159,89 @@ MMD
                 --strategy distribution \
                 --config_path configs/CD4/cd4_mmd_kld_no_smote.ini
 
-* **A549** :
+* **CD4** and **HAFN**:
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/cd4_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy distribution \
+                --config_path configs/CD4/cd4_hafn_no_smote.ini
+
+* **A549** and **MMD**:
     .. code:: console
         
         python scripts/run.py --fold /your/path/to/a549_folder \
                 --log_dir /where/you/will/find/logs \ 
                 --strategy distribution_1stage \
-                --config_path configs/A549/**MISSING**
+                --config_path configs/A549/a549_mmd.ini
 
-* **GDC** :
+
+* **A549** and **SAFN**:
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/a549_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy distribution_1stage \
+                --config_path configs/A549/a549_safn.ini
+
+* **GDC** and **MMD**:
     .. code:: console
         
         python scripts/run.py --fold /your/path/to/gdc_folder \
                 --log_dir /where/you/will/find/logs \ 
                 --strategy distribution_1stage \
                 --config_path configs/GDC/gdc_mmd_no_smote.ini
+
+* **GDC** and **HAFN**:
+    .. code:: console
+        
+        python scripts/run.py --fold /your/path/to/gdc_folder \
+                --log_dir /where/you/will/find/logs \ 
+                --strategy distribution_1stage \
+                --config_path configs/GDC/gdc_hafn_no_smote.ini
+
+
+
+Plot latent spaces
+===================
+
+It may be useful to take a look inside your model and plot what is happening inside your latent space.
+We provide a utility to do conveniently do so. Take a dataset, a model (hopefully trained previously),
+and the function will plot the different domains in the dataset, choosing a main color to each label, 
+and then assign a gradient of that color to each domain.
+Ideally if the domain translation has been successfull, you should see that different gradients of each color 
+(e.g. samples from different domains and same label) are overlapped in a common distribution.
+
+Below we report examples for all the datasets, calling the `main` function provided in `scripts/visualizer.py`
+
+* **CD4**
+    
+    .. code-block:: py3
+
+        from visualizer import main
+        main(dataset_name='cd4', dataset_folder='dataset_nature',
+            model_name='cd4_vae',
+            checkpoints="results/cd4/mmd/ROCCNNRF/{omic}VAETrainerDistributionepoch891.pth", 
+            output_path='cd4.png')
+
+
+* **A549**
+    
+    .. code-block:: py3
+
+        from visualizer import main
+        main(dataset_name='a549', dataset_folder='dataset_nature_atac-rna',
+            model_name='a549_vae',
+            checkpoints="results/a549/baseline/KNNAccuracySklearn/{omic}VAETrainerepoch1494.pth", 
+            output_path='cd4.png')
+
+
+* **GDC**
+    
+    .. code-block:: py3
+
+        from visualizer import main
+        main(dataset_name='gdc', dataset_folder='dataset_breast',
+            model_name='gdc_vae',
+            checkpoints="results/gdc/gdc_mmd/ROCCNNRF/{omic}VAETrainerDistributionepoch103.pth", 
+            output_path='gdc.png')
