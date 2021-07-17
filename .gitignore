@@ -16,6 +16,7 @@ saved_models
 notebooks/
 mytrainscripts/
 logs/
+release
 test_configs/
 ###############
 # MACOS STUFF #

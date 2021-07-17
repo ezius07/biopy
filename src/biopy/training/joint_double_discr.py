@@ -153,7 +153,7 @@ class JointDoubleDiscr(JointTrainer):
                     labels_loss = self.discriminate_loss(label_scores, batches[i][1])
                     omics_loss = self.discriminate_loss(omic_scores, dict_label[omic])
 
-                    loss = MSE_WEIGHT*mse_loss + WEIGHT_DISCR_LABELS*labels_los0 \
+                    loss = MSE_WEIGHT*mse_loss + WEIGHT_DISCR_LABELS*labels_loss \
                             + WEIGHT_DISCR_OMICS*omics_loss + KLD_WEIGHT*kld_loss
 
                     # compute accumulated gradients
