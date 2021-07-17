@@ -23,9 +23,13 @@ Expression Autoencoders
 Files in `biopy.models.ExprAutoEncoders.py` includes the different custom models implemented to work with Expression data (mRNA, miRNA, meth...) in 
 all the different datasets, and the base layer for all of them is the FC layer. 
 We implemented 4 different kinds of AEs:
+
 * Plain AE
+
 * Variational AE
+
 * Adversarial AE
+
 * Supervised Adversarial AE
 
 For each kind the Encoder and Decoder were treated as interchangeable modules.

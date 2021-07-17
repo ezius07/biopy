@@ -6,10 +6,53 @@ Replicating results
 After having presented the technical details of how the different pipelines are implemented, this section 
 provides a more practical approach with snippets on how to run experiments to replicate our results.
 
+
 .. warning::
     To execute the snippets in this section you need to install our package and its dependencies.
     See :ref:`Installation` for details on how to do that and download the datasets as well.
 
+Strategies 
+================
+
+
+We provide a ready-made script to execute all the proposed implementations. Below more details on the parameters
+that you need to specify, but the main one are 
+
+* the dataset
+* the training method aka the strategy
+
+For a more specific description of how are strategy used inside our framework see :ref:`The trainer wrapper`
+For a more theorical perspective on said strategies, see instead our presentation.
+Here we report just a brief summary of all the available strategies that you can ask our framework tu run:
+
+* **one_shot** 
+    Most basic implementation. Allows to train a standard VAE, AAE, or Supervised AAE on a single domain
+
+* **baseline**
+    Implements the  method reported as baseline, with a first stage (meant for image domains) with a discriminator 
+    on the labels. The second stage has the discriminator as well and uses an anchor loss when available, on paired datasets.
+
+* **baseline_1stage**
+    Meant for datasets that do not include an image domain. Only executes the second stage of 
+    the baseline explained above
+
+* **joint_estimator**
+    Our first proposed variation; to avoid the need for an anchor loss to match the latent space, tries 
+    to estimate in a first stage a distribution conditioned on the label; and then to impose that distribution
+    in a second stage separately per each domain/omic, using the framework of Adversarial AEs.
+
+* **joint_double_discr**
+    Same principle of the previous one, but instead of using AAEs uses a discriminator to impose 
+    a common distribution.
+
+* **distribution**
+    Apply principles from domain adaptation to ensure that the different domains get encoded on a common
+    distribution. Possible to specify a weighted combination of MMD, HAFN, SAFN losses.
+    Includes a first stage of pretraining, meant for image domains.
+
+* **distribution_1stage**
+    Same as above but without the first stage of pretraining
+    
 
 Run the script 
 ================
@@ -74,8 +117,8 @@ Below we report the command to reproduce the results applying the baseline metho
 Joint Training with Adversarial AEs
 ------------------------------------
 
-This snippets are to run experiments with our proposed variation - 2 stage Joint Training.
-
+This snippets are to run experiments with our proposed variation - 2 stage Joint Training, with a double
+ discriminator.
 
 ___to do ____
 
