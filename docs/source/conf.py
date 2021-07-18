@@ -24,7 +24,7 @@ copyright = '2021, Francesco Bianco Morghet, Eros Fanì, Gabriele Goletto, Gabri
 author = 'Francesco Bianco Morghet, Eros Fanì, Gabriele Goletto, Gabriele Trivigno'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.1.2'
 
 
 # -- General configuration ---------------------------------------------------

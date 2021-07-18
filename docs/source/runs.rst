@@ -49,7 +49,7 @@ Here we report just a brief summary of all the available strategies that you can
 
 * **distribution**
     Apply principles from domain adaptation to ensure that the different domains get encoded on a common
-    distribution. Possible to specify a weighted combination of MMD, HAFN, SAFN losses.
+    distribution. Possible to specify a weighted combination of MKMMD, HAFN, SAFN losses.
     Includes a first stage of pretraining, meant for image domains.
 
 * **distribution_1stage**
@@ -155,7 +155,7 @@ Training with losses from Domain adaptation:
 These snippets are to execute experiments with our proposed variations that utilizes techniques from Domain adaptation.
 Use either one of the proposed losses on either one of the datasets:
 
-* **CD4** and **MMD**:
+* **CD4** and **MKMMD**:
     .. code:: console
         
         python scripts/run.py --fold /your/path/to/cd4_folder \
@@ -171,7 +171,7 @@ Use either one of the proposed losses on either one of the datasets:
                 --strategy distribution \
                 --config_path configs/CD4/cd4_hafn_no_smote.ini
 
-* **A549** and **MMD**:
+* **A549** and **MKMMD**:
     .. code:: console
         
         python scripts/run.py --fold /your/path/to/a549_folder \
@@ -188,7 +188,7 @@ Use either one of the proposed losses on either one of the datasets:
                 --strategy distribution_1stage \
                 --config_path configs/A549/a549_safn.ini
 
-* **GDC** and **MMD**:
+* **GDC** and **MKMMD**:
     .. code:: console
         
         python scripts/run.py --fold /your/path/to/gdc_folder \
